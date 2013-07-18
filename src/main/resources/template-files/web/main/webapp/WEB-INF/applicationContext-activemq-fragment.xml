@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/spring"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring
+       http://camel.apache.org/schema/spring/camel-spring.xsd
+       http://www.springframework.org/schema/tx
+	   http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+       http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean
+        id="jms"
+        class="org.apache.activemq.camel.component.ActiveMQComponent" >
+
+        <property name="connectionFactory" >
+
+            <bean class="org.apache.activemq.ActiveMQConnectionFactory" >
+
+                <property
+                    name="brokerURL"
+                    value="tcp://localhost:61616" />
+            </bean>
+        </property>
+    </bean>
+</beans>

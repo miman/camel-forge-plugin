@@ -16,3 +16,5 @@ Apache Camel route plugin
 
 This is a plugin for creating a sub-project which contains one or more camel routes and any classes needed by these routes (transformations...). This is then run by the web project created with camel-war plugin.
 
+
+More info around this plugin can be found at the Wiki [here] (https://github.com/miman/camel-forge-plugin/wiki/Camel-JBoss-Forge-plugin-description)

@@ -1,4 +1,4 @@
-package se.miman.forge.plugin.camel.facet.helper;
+package eu.miman.forge.plugin.camel.facet.helper;
 
 import org.apache.maven.model.Build;
 import org.apache.maven.model.Model;

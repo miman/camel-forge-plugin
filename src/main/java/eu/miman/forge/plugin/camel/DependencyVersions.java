@@ -1,4 +1,4 @@
-package se.miman.forge.plugin.camel;
+package eu.miman.forge.plugin.camel;
 
 public class DependencyVersions {
 	public static final String SPRING_VERSION = "3.0.1.RELEASE";

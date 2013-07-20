@@ -1,4 +1,4 @@
-package se.miman.forge.plugin.camel;
+package eu.miman.forge.plugin.camel;
 
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
@@ -15,9 +15,10 @@ import org.jboss.forge.shell.plugins.Plugin;
 import org.jboss.forge.shell.plugins.RequiresProject;
 import org.jboss.forge.shell.plugins.SetupCommand;
 
-import se.miman.forge.plugin.camel.facet.CamelWebActiveMqPrjFacet;
-import se.miman.forge.plugin.camel.facet.CamelWebPrjFacet;
-import se.miman.forge.plugin.camel.facet.CamelWebRestletPrjFacet;
+import eu.miman.forge.plugin.camel.facet.CamelWebActiveMqPrjFacet;
+import eu.miman.forge.plugin.camel.facet.CamelWebPrjFacet;
+import eu.miman.forge.plugin.camel.facet.CamelWebRestletPrjFacet;
+
 
 /**
  * Modifies a project to be a Spring based WAR project that can run Apache Camel

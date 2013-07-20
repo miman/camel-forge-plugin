@@ -1,4 +1,4 @@
-package se.miman.forge.plugin.camel;
+package eu.miman.forge.plugin.camel;
 
 
 public enum ApacheCamelRouteType {

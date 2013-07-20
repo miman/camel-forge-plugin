@@ -1,7 +1,7 @@
 /**
  * 
  */
-package se.miman.forge.plugin.camel.facet;
+package eu.miman.forge.plugin.camel.facet;
 
 import javax.inject.Inject;
 
@@ -15,7 +15,7 @@ import org.jboss.forge.shell.ShellPrintWriter;
 import org.jboss.forge.shell.plugins.Alias;
 import org.jboss.forge.shell.plugins.RequiresFacet;
 
-import se.miman.forge.plugin.util.MimanBaseFacet;
+import eu.miman.forge.plugin.util.MimanBaseFacet;
 
 /**
  * This is the Facet class for a projects with ActiveMQ support. It makes sure

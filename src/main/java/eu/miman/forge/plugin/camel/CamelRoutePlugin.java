@@ -1,4 +1,4 @@
-package se.miman.forge.plugin.camel;
+package eu.miman.forge.plugin.camel;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,10 +31,10 @@ import org.jboss.forge.shell.plugins.Plugin;
 import org.jboss.forge.shell.plugins.RequiresProject;
 import org.jboss.forge.shell.plugins.SetupCommand;
 
-import se.miman.forge.plugin.camel.facet.CamelActiveMqRoutePrjFacet;
-import se.miman.forge.plugin.camel.facet.CamelRoutePrjFacet;
-import se.miman.forge.plugin.util.NazgulPrjUtil;
-import se.miman.forge.plugin.util.VelocityUtil;
+import eu.miman.forge.plugin.camel.facet.CamelActiveMqRoutePrjFacet;
+import eu.miman.forge.plugin.camel.facet.CamelRoutePrjFacet;
+import eu.miman.forge.plugin.util.NazgulPrjUtil;
+import eu.miman.forge.plugin.util.VelocityUtil;
 
 /**
  * Modifies a project to be a Spring based WAR project that can run Apache Camel

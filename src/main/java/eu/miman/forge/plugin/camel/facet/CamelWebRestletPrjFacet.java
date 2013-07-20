@@ -1,7 +1,7 @@
 /**
  * 
  */
-package se.miman.forge.plugin.camel.facet;
+package eu.miman.forge.plugin.camel.facet;
 
 import java.io.IOException;
 
@@ -19,9 +19,9 @@ import org.jboss.forge.shell.ShellPrintWriter;
 import org.jboss.forge.shell.plugins.Alias;
 import org.jboss.forge.shell.plugins.RequiresFacet;
 
-import se.miman.forge.plugin.util.MimanBaseFacet;
-import se.miman.forge.plugin.util.helpers.DomFileHelper;
-import se.miman.forge.plugin.util.helpers.DomFileHelperImpl;
+import eu.miman.forge.plugin.util.MimanBaseFacet;
+import eu.miman.forge.plugin.util.helpers.DomFileHelper;
+import eu.miman.forge.plugin.util.helpers.DomFileHelperImpl;
 
 /**
  * This is the Facet class for Camel war projects with Restlet support.

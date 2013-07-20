@@ -1,7 +1,7 @@
 /**
  * 
  */
-package se.miman.forge.plugin.camel.facet;
+package eu.miman.forge.plugin.camel.facet;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,12 +23,12 @@ import org.jboss.forge.shell.ShellPrintWriter;
 import org.jboss.forge.shell.plugins.Alias;
 import org.jboss.forge.shell.plugins.RequiresFacet;
 
-import se.miman.forge.plugin.util.MimanBaseFacet;
-import se.miman.forge.plugin.util.NazgulPrjUtil;
-import se.miman.forge.plugin.util.VelocityUtil;
-import se.miman.forge.plugin.util.dto.MavenProjectId;
-import se.miman.forge.plugin.util.helpers.MavenPomHelper;
-import se.miman.forge.plugin.util.helpers.MavenPomHelperImpl;
+import eu.miman.forge.plugin.util.MimanBaseFacet;
+import eu.miman.forge.plugin.util.NazgulPrjUtil;
+import eu.miman.forge.plugin.util.VelocityUtil;
+import eu.miman.forge.plugin.util.dto.MavenProjectId;
+import eu.miman.forge.plugin.util.helpers.MavenPomHelper;
+import eu.miman.forge.plugin.util.helpers.MavenPomHelperImpl;
 
 /**
  * This is the Facet class for Camel war projects & artifacts 

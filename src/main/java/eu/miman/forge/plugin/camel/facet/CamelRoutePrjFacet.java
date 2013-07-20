@@ -1,7 +1,7 @@
 /**
  * 
  */
-package se.miman.forge.plugin.camel.facet;
+package eu.miman.forge.plugin.camel.facet;
 
 import java.util.List;
 
@@ -16,9 +16,9 @@ import org.jboss.forge.project.services.ProjectFactory;
 import org.jboss.forge.shell.plugins.Alias;
 import org.jboss.forge.shell.plugins.RequiresFacet;
 
-import se.miman.forge.plugin.util.MimanBaseFacet;
-import se.miman.forge.plugin.util.NazgulPrjUtil;
-import se.miman.forge.plugin.util.dto.MavenProjectId;
+import eu.miman.forge.plugin.util.MimanBaseFacet;
+import eu.miman.forge.plugin.util.NazgulPrjUtil;
+import eu.miman.forge.plugin.util.dto.MavenProjectId;
 
 /**
  * This is the Facet class for Camel jar projects & artifacts 

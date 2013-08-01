@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<packaging>war</packaging>
+
+	<properties>
+		<camel.version>2.11.1</camel.version>
+		<ibm.wmq.version>7.0.1.0</ibm.wmq.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jms</artifactId>
+			<version>${camel.version}</version>
+			<!-- This is excluded while it refers to an old version of spring -->
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-jms</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-beans</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-context</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-tx</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- Added spring dependencies removed from camel-jms due to wrong version, 
+			but this time with the correct version -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- JMS lib -->
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-jms_1.1_spec</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
+		<!-- IBM MQ specific dependencies -->
+		<dependency>
+			<groupId>com.ibm</groupId>
+			<artifactId>com.ibm.mqjms</artifactId>
+			<version>${ibm.wmq.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm</groupId>
+			<artifactId>com.ibm.mq.jmqi</artifactId>
+			<version>${ibm.wmq.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.disthub2</groupId>
+			<artifactId>dhbcore</artifactId>
+			<version>7.0.1.1</version>
+		</dependency>
+		
+	</dependencies>
+
+</project>

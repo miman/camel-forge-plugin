@@ -58,17 +58,6 @@ public class CamelRoutePrjFacet extends MimanBaseFacet {
 		final MavenCoreFacet mvnFacet = project.getFacet(MavenCoreFacet.class);
 		Model pom = mvnFacet.getPOM();
 
-		// We verify that we have a parent and that it ends with the default parent suffixes
-		if (pom.getParent() == null) {
-			return false;
-		}
-		if (!pom.getParent().getGroupId().endsWith("poms.parent")) {
-			return false;
-		}
-		if (!pom.getParent().getArtifactId().endsWith("-parent")) {
-			return false;
-		}
-		
 		List<Dependency> deps = pom.getDependencies();
 		boolean dependenciesOk = false;
 		for (Dependency dependency : deps) {

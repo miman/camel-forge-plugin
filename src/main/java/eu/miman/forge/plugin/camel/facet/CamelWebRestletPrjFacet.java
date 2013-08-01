@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import javax.inject.Inject;
 
+import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Model;
 import org.codehaus.plexus.util.xml.Xpp3Dom;
 import org.codehaus.plexus.util.xml.Xpp3DomUtils;
@@ -70,11 +71,16 @@ public class CamelWebRestletPrjFacet extends MimanBaseFacet {
 			final MavenCoreFacet mvnFacet = project.getFacet(MavenCoreFacet.class);
 			Model pom = mvnFacet.getPOM();
 
-			// We verify that we have a parent and that it ends with the default parent suffixes
-			if (pom.getParent() == null) {
+			java.util.List<Dependency> deps = pom.getDependencies();
+			if (deps == null) {
 				return false;
 			}
-			return true;
+			for (Dependency dependency : deps) {
+				if (dependency.getGroupId().compareToIgnoreCase("org.apache.camel") == 0 
+						&& dependency.getArtifactId().compareToIgnoreCase("camel-restlet") == 0) {
+					return true;
+				}
+			}
 		}
 		return reply;
 	}

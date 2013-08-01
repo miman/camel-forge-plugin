@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Model;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -18,7 +19,6 @@ import org.jboss.forge.project.Project;
 import org.jboss.forge.project.facets.DependencyFacet;
 import org.jboss.forge.project.facets.JavaSourceFacet;
 import org.jboss.forge.project.services.ProjectFactory;
-import org.jboss.forge.shell.ShellColor;
 import org.jboss.forge.shell.ShellPrintWriter;
 import org.jboss.forge.shell.plugins.Alias;
 import org.jboss.forge.shell.plugins.RequiresFacet;
@@ -26,7 +26,6 @@ import org.jboss.forge.shell.plugins.RequiresFacet;
 import eu.miman.forge.plugin.util.MimanBaseFacet;
 import eu.miman.forge.plugin.util.NazgulPrjUtil;
 import eu.miman.forge.plugin.util.VelocityUtil;
-import eu.miman.forge.plugin.util.dto.MavenProjectId;
 import eu.miman.forge.plugin.util.helpers.MavenPomHelper;
 import eu.miman.forge.plugin.util.helpers.MavenPomHelperImpl;
 
@@ -93,20 +92,17 @@ public class CamelWebPrjFacet extends MimanBaseFacet {
 		final MavenCoreFacet mvnFacet = project.getFacet(MavenCoreFacet.class);
 		Model pom = mvnFacet.getPOM();
 
-		// We verify that we have a parent and that it ends with the default parent suffixes
-		if (pom.getParent() == null) {
+		java.util.List<Dependency> deps = pom.getDependencies();
+		if (deps == null) {
 			return false;
 		}
-		if (!pom.getParent().getGroupId().endsWith("poms.parent")) {
-			return false;
+		for (Dependency dependency : deps) {
+			if (dependency.getGroupId().compareToIgnoreCase("org.apache.camel") == 0 
+					&& dependency.getArtifactId().compareToIgnoreCase("camel-core") == 0) {
+				return true;
+			}
 		}
-		if (!pom.getParent().getArtifactId().endsWith("-parent")) {
-			return false;
-		}
-		if (pom.getPackaging().compareToIgnoreCase("war") != 0) {
-			return false;
-		}
-		return true;
+		return false;
 	}
 
 	// Helper functions ****************************************
@@ -119,10 +115,7 @@ public class CamelWebPrjFacet extends MimanBaseFacet {
 		final MavenCoreFacet mvnFacet = project.getFacet(MavenCoreFacet.class);
 		Model pom = mvnFacet.getPOM();
 
-		// Change the POM parent to parent project
-		MavenProjectId prjId = nazgulPrjUtil.getParentProjectId(project, prjFactory);
 		mergePomFileWithTemplate(pom);
-		getMavenPomHelper().addOrUpdateParentProject(prjId, pom);
 		pom.setDescription(prjDescription);
 		pom.setPackaging("war");
 		mvnFacet.setPOM(pom);
@@ -131,14 +124,14 @@ public class CamelWebPrjFacet extends MimanBaseFacet {
 			// If no camel base package is set, we use the group-id of the parent pom as the default path
 			Project rootPrj = nazgulPrjUtil.findRootProject(project, prjFactory);
 			if (rootPrj == null) {
-				// The root project cannot be found
-				writer.println(ShellColor.RED, "Error - Couldn't find any root project above this project !");
-				return;
-			}
-			final MavenCoreFacet rootPrjMvnFacet = rootPrj.getFacet(MavenCoreFacet.class);
-			Model rootPrjPom = rootPrjMvnFacet.getPOM();
+				// The root project cannot be found -> use this projects group-id
+				camelBasePackage = pom.getGroupId().trim().replace("-", "").replace("_", "");
+			} else {
+				final MavenCoreFacet rootPrjMvnFacet = rootPrj.getFacet(MavenCoreFacet.class);
+				Model rootPrjPom = rootPrjMvnFacet.getPOM();
 
-			camelBasePackage = rootPrjPom.getGroupId().trim().replace("-", "").replace("_", "");
+				camelBasePackage = rootPrjPom.getGroupId().trim().replace("-", "").replace("_", "");
+			}
 		}
 		createApplicationContext(camelBasePackage);
 		createWebXml();

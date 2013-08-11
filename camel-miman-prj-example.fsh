@@ -12,9 +12,6 @@ set ACCEPT_DEFAULTS true;
 new-project --named camel-m-test-prj --topLevelPackage se.comp.test;
 miman-prj setup;
 
-@/* We need to build the project to get the parent pom in the m2 repository */;
-mvn install;
-
 new-project --named testprj-war --topLevelPackage se.comp.test.web;
 camel-web setup --camelBasePackage se.comp.test --restletSupport true;
 

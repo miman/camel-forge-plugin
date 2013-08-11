@@ -25,11 +25,14 @@ import org.jboss.forge.shell.plugins.Plugin;
 import org.jboss.forge.shell.plugins.RequiresProject;
 import org.jboss.forge.shell.plugins.SetupCommand;
 
+import eu.miman.forge.plugin.camel.completer.BooleanCompleter;
 import eu.miman.forge.plugin.camel.facet.CamelWebActiveMqPrjFacet;
 import eu.miman.forge.plugin.camel.facet.CamelWebPrjFacet;
 import eu.miman.forge.plugin.camel.facet.CamelWebRestletPrjFacet;
 import eu.miman.forge.plugin.camel.facet.CamelWebWebsphereMqPrjFacet;
 import eu.miman.forge.plugin.util.VelocityUtil;
+import eu.miman.forge.plugin.util.helpers.FilePathUtil;
+import eu.miman.forge.plugin.util.helpers.FilePathUtilImpl;
 
 
 /**
@@ -86,7 +89,7 @@ public class CamelWebPlugin implements Plugin {
 	@SetupCommand
 	@Command(value = "setup", help = "Convert the project to a Spring based WAR project that can run Apache Camel routes")
 	public void setup(
-			@Option(name = "camelBasePackage", shortName = "cbp") String camelBasePackage,
+			@Option(name = "camelBasePackage", shortName = "cbp", required=true) String camelBasePackage,
 			@Option(name = "prjDescription", shortName = "pd") String prjDescription,
 			@Option(name = "restletSupport", shortName = "rs") String restletSupport,
 			PipeOut out) {
@@ -95,7 +98,11 @@ public class CamelWebPlugin implements Plugin {
 		// ShellMessages.info(out, "You must supply a camelBasePackage!");
 		// return;
 		// }
-		CamelWebPrjFacet.camelBasePackage = camelBasePackage;
+		FilePathUtil filePathUtil = new FilePathUtilImpl();
+		String handledCamelBasePackage = filePathUtil.replaceRelativePathToken(
+				camelBasePackage, project);
+
+		CamelWebPrjFacet.camelBasePackage = handledCamelBasePackage;
 		CamelWebPrjFacet.prjDescription = prjDescription;
 		if (!project.hasFacet(CamelWebPrjFacet.class)) {
 			event.fire(new InstallFacets(CamelWebPrjFacet.class));
@@ -129,11 +136,11 @@ public class CamelWebPlugin implements Plugin {
 
 	@Command(value = "add-webspheremq-support", help = "Adds support for Websphere MQ in a Spring based WAR project that can run Apache Camel routes")
 	public void addWebsphereMqSupport(
-			@Option(name = "wmqHostname") String wmqHostname, 
-			@Option(name = "wmqPort") String wmqPort,
-			@Option(name = "wmqQueueManager") String wmqQueueManager,
-			@Option(name = "wmqChannel") String wmqChannel,
-			@Option(name = "addExampleRoutes") Boolean addExampleRoutes,
+			@Option(name = "hostname", required=true) String wmqHostname, 
+			@Option(name = "port", required=true) String wmqPort,
+			@Option(name = "queueManager", required=true) String wmqQueueManager,
+			@Option(name = "channel", required=true) String wmqChannel,
+			@Option(name = "exampleRoutes", completer = BooleanCompleter.class) Boolean addExampleRoutes,
 								PipeOut out) {
 
 		if (!project.hasFacet(CamelWebPrjFacet.class)) {

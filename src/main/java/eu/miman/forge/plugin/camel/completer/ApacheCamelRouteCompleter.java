@@ -1,7 +1,7 @@
 /**
  * 
  */
-package eu.miman.forge.plugin.camel;
+package eu.miman.forge.plugin.camel.completer;
 
 import java.util.Arrays;
 

@@ -31,6 +31,9 @@ import org.jboss.forge.shell.plugins.Plugin;
 import org.jboss.forge.shell.plugins.RequiresProject;
 import org.jboss.forge.shell.plugins.SetupCommand;
 
+import eu.miman.forge.plugin.camel.completer.ApacheCamelRouteCompleter;
+import eu.miman.forge.plugin.camel.completer.ApacheCamelRouteType;
+import eu.miman.forge.plugin.camel.completer.BooleanCompleter;
 import eu.miman.forge.plugin.camel.facet.CamelActiveMqRoutePrjFacet;
 import eu.miman.forge.plugin.camel.facet.CamelRoutePrjFacet;
 import eu.miman.forge.plugin.util.NazgulPrjUtil;
@@ -99,7 +102,7 @@ public class CamelRoutePlugin implements Plugin {
 	public void setup(
 			@Option(name = "prjDescription", shortName = "pd") String prjDescription,
 			@Option(name = "warProjectArtifactId", shortName = "wpa") String warProjectArtifactId,
-			@Option(name = "addTestRoute", shortName = "atr") boolean addTestRoute,
+			@Option(name = "addTestRoute", shortName = "atr", completer = BooleanCompleter.class) boolean addTestRoute,
 			PipeOut out) {
 
 		if (!project.hasFacet(CamelRoutePrjFacet.class)) {

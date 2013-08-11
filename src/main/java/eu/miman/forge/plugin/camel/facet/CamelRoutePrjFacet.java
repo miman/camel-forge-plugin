@@ -17,8 +17,6 @@ import org.jboss.forge.shell.plugins.Alias;
 import org.jboss.forge.shell.plugins.RequiresFacet;
 
 import eu.miman.forge.plugin.util.MimanBaseFacet;
-import eu.miman.forge.plugin.util.NazgulPrjUtil;
-import eu.miman.forge.plugin.util.dto.MavenProjectId;
 
 /**
  * This is the Facet class for Camel jar projects & artifacts 
@@ -34,11 +32,8 @@ public class CamelRoutePrjFacet extends MimanBaseFacet {
 	
 	private String prjDescription = "JAR project for Camel routes";
 	
-	private NazgulPrjUtil nazgulPrjUtil;
-
 	public CamelRoutePrjFacet() {
 		super();
-		nazgulPrjUtil = new NazgulPrjUtil();
 	}
 	
 	/* (non-Javadoc)
@@ -79,10 +74,7 @@ public class CamelRoutePrjFacet extends MimanBaseFacet {
 		final MavenCoreFacet mvnFacet = project.getFacet(MavenCoreFacet.class);
 		Model pom = mvnFacet.getPOM();
 
-		// Change the POM parent to parent project
-		MavenProjectId prjId = nazgulPrjUtil.getParentProjectId(project, prjFactory);
 		mergePomFileWithTemplate(pom);
-		getMavenPomHelper().addOrUpdateParentProject(prjId, pom);
 		pom.setDescription(prjDescription);
 		mvnFacet.setPOM(pom);
 	}
